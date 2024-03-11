@@ -29,4 +29,5 @@ include_once '../templates/root.php';
                 </form>
             </div>
         </div>
+    </div>
 </body>

@@ -44,4 +44,5 @@ $jabatan_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </form>
             </div>
         </div>
+    </div>
 </body>

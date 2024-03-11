@@ -103,12 +103,12 @@ include_once 'templates/root.php';
                                 </a>
                             </div>
                             <div class="accordion-body">
-                                <a href="#">
+                                <a href="/report/fr-nik-gaji-bersih.php">
                                     Laporan Gaji Bersih Tiap Karyawan
                                 </a>
                             </div>
                             <div class="accordion-body">
-                                <a href="#">
+                                <a href="/report/fr-rekap-gaji-bersih.php">
                                     Laporan Rekap Gaji Bersih Karyawan
                                 </a>
                             </div>

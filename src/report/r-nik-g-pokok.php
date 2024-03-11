@@ -18,13 +18,13 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <head>
-    <title>LaporanGaji Pokok Tiap Karyawan</title>
+    <title>Laporan Gaji Pokok Tiap Karyawan</title>
 </head>
 
 <body>
     <div class="container-fluid p-4">
         <div class="row align-items-center mb-3">
-            <h1 class="text-center">LaporanGaji Pokok Tiap Karyawan</h1>
+            <h1 class="text-center">Laporan Gaji Pokok Tiap Karyawan</h1>
         </div>
         <div class="row mb-3 overflow-x-scroll">
             <table class="table table-striped">
@@ -58,6 +58,6 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <button type="button" class="btn btn-success btn-lg printPageButton" onclick="window.print()">🖨️ Cetak</button>
                 <a href="javascript:history.back()" class="btn btn-danger btn-lg printPageButton">Kembali</a>
             </div>
-        </div>>
+        </div>
     </div>
 </body>
