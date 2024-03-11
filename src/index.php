@@ -134,4 +134,5 @@ include_once 'templates/root.php';
                 </div>
             </div>
         </div>
+    </div>
 </body>
