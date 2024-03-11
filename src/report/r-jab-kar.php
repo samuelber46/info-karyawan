@@ -28,7 +28,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="row mb-3">
             <p class="text-uppercase">kode jabatan : <strong><?= $jabatan ?></strong></p>
         </div>
-        <div class="row mb-3 overflow-x-scroll">
+        <div class="row mb-3 table-responsive">
             <table class="table table-striped">
                 <tr>
                     <th>NIK</th>

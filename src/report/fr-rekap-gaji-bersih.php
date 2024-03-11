@@ -15,7 +15,7 @@ include_once '../templates/root.php';
                 </h1>
             </div>
             <div class="card-body">
-                <form action="fr-rekap-gaji-bersih.php" method="GET">
+                <form action="r-rekap-gaji-bersih.php" method="GET">
                     <div class="mb-3">
                         <label for="bulan" class="form-label">Bulan</label>
                         <input type="date" name="bulan" class="form-control" id="bulan" required>

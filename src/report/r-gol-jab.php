@@ -21,7 +21,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="row align-items-center mb-3">
             <h1 class="text-center mb-3">Laporan Jabatan Vs Gologan Karyawan</h1>
         </div>
-        <div class="row mb-3 overflow-x-scroll">
+        <div class="row mb-3 table-responsive">
             <table class="table table-striped">
                 <tr>
                     <th>Jabatan</th>
