@@ -1,0 +1,3 @@
+RewriteEngine On
+
+RedirectMatch 404 /templates/
