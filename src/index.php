@@ -24,7 +24,7 @@ include_once 'templates/root.php';
                         </h2>
                         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushMenuUtama">
                             <div class="accordion-body">
-                                <a href="#">
+                                <a href="/entri/fe-jabatan.php">
                                     Form Entri Jabatan
                                 </a>
                             </div>
