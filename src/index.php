@@ -7,8 +7,8 @@ include_once 'templates/root.php';
 </head>
 
 <body>
-    <div class="container h-100 d-flex align-items-center justify-content-center">
-        <div class="card" style="width: 80vw">
+    <div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh">
+        <div class="card" style="min-width: 80vw">
             <div class="card-header">
                 <h1>
                     🏠 Menu Utama
