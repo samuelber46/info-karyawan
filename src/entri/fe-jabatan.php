@@ -3,18 +3,28 @@ include_once '../templates/root.php';
 include_once '../../includes/db_connect.php';
 $stmt = $dbh->query("SELECT * FROM jabatan");
 $jabatan_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$jabatan_GET = $_GET['kd_jabatan'] ?? null;
-$input_value = [];
-if (isset($jabatan_GET)) {
-    $input_value =  $dbh->query("SELECT * FROM jabatan WHERE kd_jabatan='" . $jabatan_GET . "'")->fetchAll(PDO::FETCH_ASSOC);
-    $input_value = $input_value[0];
+$kd_jabatan_edit = $_GET['kd_jabatan'] ?? null;
+$edit_value = [];
+if (isset($kd_jabatan_edit)) {
+    $edit_value =  $dbh->query("SELECT * FROM jabatan WHERE kd_jabatan='" . $kd_jabatan_edit . "'")->fetchAll(PDO::FETCH_ASSOC);
+    $edit_value = $edit_value[0] ?? null;
 }
-$jabatan_POST = $_POST['kd_jabatan'] ?? null;
-if (isset($jabatan_POST)) {
-    $stmt = $dbh->query("DELETE FROM jabatan WHERE kd_jabatan='" . $jabatan_POST . "'");
+$del_jabatan = $_POST['del_jabatan'] ?? null;
+if (isset($del_jabatan)) {
+    $dbh->query("DELETE FROM jabatan WHERE kd_jabatan='" . $del_jabatan . "'");
     echo '<script>alert("Jabatan berhasil dihapus"); window.location.href = "fe-jabatan.php";</script>';
 }
-
+if (isset($_POST['kd_jabatan'])) {
+    if (!in_array($_POST['kd_jabatan'], array_column($jabatan_list, 'kd_jabatan'))) {
+        $stmt = $dbh->prepare("INSERT INTO jabatan(kd_jabatan, nm_jabatan, tj_jabatan) VALUES (:kd_jabatan, :nm_jabatan, :tj_jabatan)");
+        $stmt->execute($_POST);
+        echo '<script>alert("Jabatan berhasil ditambahkan"); window.location.href = "fe-jabatan.php";</script>';
+    } else {
+        $stmt = $dbh->prepare("UPDATE jabatan SET nm_jabatan=:nm_jabatan, tj_jabatan=:tj_jabatan WHERE kd_jabatan=:kd_jabatan");
+        $stmt->execute($_POST);
+        echo '<script>alert("Jabatan berhasil diubah"); window.location.href = "fe-jabatan.php";</script>';
+    }
+}
 ?>
 
 <head>
@@ -31,47 +41,16 @@ if (isset($jabatan_POST)) {
             </div>
             <div class="card-body">
                 <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-md-4">
-                            <form action="fe-jabatan.php" method="POST">
-                                <?php if ($input_value != null) {
-                                    foreach ($input_value as $key => $value) {
-                                        echo '<div class="mb-3">' .
-                                            '<label for="' . $key . '" class="form-label">' . $key . '</label>' .
-                                            '<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="' . $value . '" required>' .
-                                            '</div>';
-                                    }
-                                } else {
-                                    echo
-                                    '<div class="mb-3">
-                                    <label for="kd_jabatan" class="form-label">kd_jabatan</label>
-                                    <input type="text" name="kd_jabatan" class="form-control" id="kd_jabatan" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="nm_jabatan" class="form-label">nm_jabatan</label>
-                                        <input type="text" name="nm_jabatan" class="form-control" id="nm_jabatan" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="tj_jabatan" class="form-label">tj_jabatan</label>
-                                        <input type="text" name="tj_jabatan" class="form-control" id="tj_jabatan" required>
-                                    </div>';
-                                }
-                                ?>
-                                <div class="d-flex gap-2">
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                    <a href="/" class="btn btn-danger">Kembali</a>
-                                </div>
-                            </form>
-                        </div>
-                        <form class="col-md-8" action="fe-jabatan.php" method="POST">
-                            <div class="table-responsive table-entri">
+                    <div class="row align-items-start">
+                        <form class="col-md-8 order-md-last mb-3" action="fe-jabatan.php" method="POST">
+                            <div class="table-responsive table-entri" style="max-height: 80vh">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Kode Jabatan</th>
-                                            <th scope="col">Jabatan</th>
-                                            <th scope="col">Tunjangan Jabatan</th>
-                                            <th scope="col">Action</th>
+                                            <th scope="col">kd_jabatan</th>
+                                            <th scope="col">nm_jabatan</th>
+                                            <th scope="col">tj_jabatan</th>
+                                            <th scope="col">aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -82,8 +61,12 @@ if (isset($jabatan_POST)) {
                                                 <td><?= $jabatan['nm_jabatan'] ?></td>
                                                 <td><?= $jabatan['tj_jabatan'] ?></td>
                                                 <td>
-                                                    <a href="fe-jabatan.php?kd_jabatan=<?= $jabatan['kd_jabatan'] ?>" class="btn btn-secondary">✍️</a>
-                                                    <button type="submit" name="kd_jabatan" value="<?= $jabatan['kd_jabatan'] ?>" class="btn btn-danger">🗑️</button>
+                                                    <div class="container overflow-hidden">
+                                                        <div class="d-flex flex-md-row flex-column gap-2">
+                                                            <a href="fe-jabatan.php?kd_jabatan=<?= $jabatan['kd_jabatan'] ?>" class="btn btn-secondary">✍️</a>
+                                                            <button type="submit" name="del_jabatan" value="<?= $jabatan['kd_jabatan'] ?>" class="btn btn-danger">🗑️</button>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         <?php } ?>
@@ -91,6 +74,27 @@ if (isset($jabatan_POST)) {
                                 </table>
                             </div>
                         </form>
+                        <hr>
+                        <div class="col-md-4 order-md-first">
+                            <form action="fe-jabatan.php" method="POST">
+                                <div class="mb-3">
+                                    <label for="kd_jabatan" class="form-label">kd_jabatan</label>
+                                    <input type="text" class="form-control" id="kd_jabatan" name="kd_jabatan" value="<?= $edit_value['kd_jabatan'] ?? '' ?>" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nm_jabatan" class="form-label">nm_jabatan</label>
+                                    <input type="text" class="form-control" id="nm_jabatan" name="nm_jabatan" value="<?= $edit_value['nm_jabatan'] ?? '' ?>" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tj_jabatan" class="form-label">tj_jabatan</label>
+                                    <input type="text" class="form-control" id="tj_jabatan" name="tj_jabatan" value="<?= $edit_value['tj_jabatan'] ?? '' ?>" required>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                    <a href="/" class="btn btn-danger">Kembali</a>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

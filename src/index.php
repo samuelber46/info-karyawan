@@ -29,32 +29,32 @@ include_once 'templates/root.php';
                                 </a>
                             </div>
                             <div class="accordion-body">
-                                <a href="#">
+                                <a href="/entri/fe-golongan.php">
                                     Form Entri Golongan
                                 </a>
                             </div>
                             <div class="accordion-body">
-                                <a href="#">
-                                    Form Gaji Pokok
+                                <a href="/entri/fe-g-pokok.php">
+                                    Form Entri Gaji Pokok
                                 </a>
                             </div>
                             <div class="accordion-body">
-                                <a href="#">
-                                    Form Entri Gaji Karyawan
+                                <a href="/entri/fe-karyawan.php">
+                                    Form Entri Karyawan
                                 </a>
                             </div>
                             <div class="accordion-body">
-                                <a href="#">
+                                <a href="/entri/fe-absen.php">
                                     Form Entri Absen
                                 </a>
                             </div>
                             <div class="accordion-body">
-                                <a href="#">
+                                <a href="/entri/fe-lembur.php">
                                     Form Entri Lembur
                                 </a>
                             </div>
                             <div class="accordion-body">
-                                <a href="#">
+                                <a href="/entri/fe-pot-kop.php">
                                     Form Entri Potongan Koperasi
                                 </a>
                             </div>

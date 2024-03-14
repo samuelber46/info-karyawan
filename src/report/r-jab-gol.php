@@ -24,54 +24,23 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="row mb-3 table-responsive">
             <table class="table table-striped">
                 <tr>
-                    <th>Gologan</th>
-                    <th>Jumlah</th>
-                    <th>All</th>
-                    <th>Lead</th>
-                    <th>QCI</th>
-                    <th>SOP</th>
-                    <th>Anal</th>
-                    <th>ADM</th>
-                    <th>SPV</th>
-                    <th>YOP</th>
+                    <?php if (count($result) > 0) {
+                        foreach (array_keys($result[0]) as $key) {
+                            echo '<th scope="col">' . $key . '</th>';
+                        }
+                    }
+                    ?>
                 </tr>
-                <?php if (sizeof($result) > 0) { ?>
-                    <?php for ($i = 0; $i < sizeof($result); $i++) { ?>
-                        <tr>
-                            <td>
-                                <?php echo $result[$i]['golongan']; ?>
-                            </td>
-                            <td>
-                                <?php echo $result[$i]['jumlah']; ?>
-                            </td>
-                            <td>
-                                <?php echo $result[$i]['Assistant Line Leader']; ?>
-                            </td>
-                            <td>
-                                <?php echo $result[$i]['Line Leader']; ?>
-                            </td>
-                            <td>
-                                <?php echo $result[$i]['Quality Control Inspector']; ?>
-                            </td>
-                            <td>
-                                <?php echo $result[$i]['Senior Operator Produksi']; ?>
-                            </td>
-                            <td>
-                                <?php echo $result[$i]['Sistem Analis']; ?>
-                            </td>
-                            <td>
-                                <?php echo $result[$i]['Staff Administrasi']; ?>
-                            </td>
-                            <td>
-                                <?php echo $result[$i]['Supervisor']; ?>
-                            </td>
-                            <td>
-                                <?php echo $result[$i]['Yunior Operator Produksi']; ?>
-                            </td>
-                        </tr>
-                <?php }
+                <?php if (count($result) > 0) {
+                    foreach ($result as $key => $value) {
+                        echo '<tr>';
+                        foreach ($value as $key2 => $value2) {
+                            echo '<td>' . $value2 . '</td>';
+                        }
+                        echo '</tr>';
+                    }
                 } else {
-                    echo "<tr><td class='text-center' colspan='9'>Data tidak ditemukan</td></tr>";
+                    echo '<tr><td colspan="' . count($result) . '">Tidak ada data</td></tr>';
                 }
                 ?>
             </table>
